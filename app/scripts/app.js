@@ -49,7 +49,8 @@ angular
           .state('register', {
             url: '/register',
             parent: 'base',
-            templateUrl: 'views/register.html'
+            templateUrl: 'views/register.html',
+            controller: 'SignUpCtrl'
           });
 
   });
