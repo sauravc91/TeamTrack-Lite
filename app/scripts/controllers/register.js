@@ -9,7 +9,7 @@
  */
 angular.module('yapp')
   .controller('SignUpCtrl', function($scope, $location, $http, $state) {
-
+    alertify.set('notifier','position', 'top-right');
     //$scope.test='Test';
     $scope.apiUrl='http://localhost:3000/api/'
 
