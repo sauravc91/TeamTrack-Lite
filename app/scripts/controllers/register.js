@@ -14,23 +14,28 @@ angular.module('yapp')
     $scope.apiUrl='http://localhost:3000/api/'
 
     $scope.register = function(obj){
-      var loginDTO={
-        "firstName": obj.firstName,
-        "lastName": obj.lastName,
-        "userName": obj.email,
-        "password": obj.password
-      };
-        $http({
-        method: 'POST',
-        url: $scope.apiUrl+'createUser',
-        data: loginDTO
-      }).then(function successCallback(response) {  
-        alertify.success('User Registration Successfull !');   
-        $state.go('login');   
-        debugger
-        }, function errorCallback(response) {
-          
-        });
-    };
 
+      if(obj.password===obj.cpassword){
+        var loginDTO={
+          "firstName": obj.firstName,
+          "lastName": obj.lastName,
+          "userName": obj.email,
+          "password": obj.password
+          };
+            $http({
+            method: 'POST',
+            url: $scope.apiUrl+'createUser',
+            data: loginDTO
+            }).then(function successCallback(response) {  
+              alertify.success('User Registration Successfull !');   
+              $state.go('login');   
+              debugger
+              }, function errorCallback(response) {
+                
+            });
+        }
+        else{
+          alertify.error('Passwords do not match');
+        }
+     }
   });
