@@ -21,6 +21,9 @@ app.use(morgan('dev'));
  
 // serve up static assets
 app.use(express.static(path.join(__dirname, 'app')));
+app.use(function(req, res) {
+    res.sendfile(__dirname + '/app/index.html');
+});
  
 // development only
 if ('development' === app.get('env')) {

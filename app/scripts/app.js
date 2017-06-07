@@ -9,10 +9,10 @@
  * Main module of the application.
  */
 angular.module('yapp', [
-    'ui.router',
-    'ngAnimate'
-  ])
-  .config(function ($stateProvider, $urlRouterProvider) {
+  'ui.router',
+  'ngAnimate'
+])
+  .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider.when('/dashboard', '/dashboard/overview');
     $urlRouterProvider.otherwise('/login');
 
@@ -54,6 +54,13 @@ angular.module('yapp', [
         templateUrl: 'views/dashboard/overview.html'
       })
 
+      // User Task Add
+      .state('logtask', {
+        url: '/logtask',
+        parent: 'user',
+        templateUrl: 'views/dashboard/task-logger.html'
+      })
+
       // User profile
       .state('profile', {
         url: '/profile',
@@ -82,4 +89,7 @@ angular.module('yapp', [
         parent: 'admin',
         templateUrl: 'views/admin/profile.html'
       });
+
+    // use the HTML5 History API
+    $locationProvider.html5Mode(true);
   });
