@@ -8,13 +8,11 @@
  *
  * Main module of the application.
  */
-angular
-  .module('yapp', [
+angular.module('yapp', [
     'ui.router',
     'ngAnimate'
   ])
-  .config(function($stateProvider, $urlRouterProvider) {
-
+  .config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.when('/dashboard', '/dashboard/overview');
     $urlRouterProvider.otherwise('/login');
 
@@ -25,7 +23,7 @@ angular
         templateUrl: 'views/base.html'
       })
 
-      //Route for login
+      // Route for login
       .state('login', {
         url: '/login',
         parent: 'base',
@@ -33,15 +31,15 @@ angular
         controller: 'LoginCtrl'
       })
 
-      //Route for sign up
+      // Route for sign up
       .state('register', {
         url: '/register',
         parent: 'base',
         templateUrl: 'views/register.html',
         controller: 'SignUpCtrl'
       })
-    
-      //User dashboard base
+
+      // User dashboard base
       .state('user', {
         url: '/user',
         parent: 'base',
@@ -49,41 +47,39 @@ angular
         controller: 'DashboardCtrl'
       })
 
-      //User OverView
+      // User OverView
       .state('overview', {
         url: '/overview',
         parent: 'user',
         templateUrl: 'views/dashboard/overview.html'
       })
 
-      //User profile
+      // User profile
       .state('profile', {
         url: '/profile',
         parent: 'user',
         templateUrl: 'views/dashboard/profile.html'
       })
 
-      //Admin dashboard base
+      // Admin dashboard base
       .state('admin', {
         url: '/admin',
         parent: 'base',
         templateUrl: 'views/admin.html',
-        //controller: 'AdminCtrl'
+      // controller: 'AdminCtrl'
       })
 
-      //Admin overview
+      // Admin overview
       .state('admin-overview', {
         url: '/overview',
         parent: 'admin',
         templateUrl: 'views/admin/overview.html'
       })
 
-      //Admin Profile
+      // Admin Profile
       .state('admin-profile', {
         url: '/profile',
         parent: 'admin',
         templateUrl: 'views/admin/profile.html'
       });
-
   });
-
