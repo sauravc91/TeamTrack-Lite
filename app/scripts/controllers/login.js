@@ -22,7 +22,7 @@ angular.module('yapp')
       }).then(function successCallback (response) {
         if (response.data.success == true) {
           sessionStorage.setItem('authToken', response.data.token);
-          $state.go('dashboard');
+          $state.go('overview');
         }else {
           alertify.error('Authentication failed for your credentials');
         }

@@ -83,6 +83,13 @@ angular.module('yapp', [
         templateUrl: 'views/admin/overview.html'
       })
 
+      // Admin user mgmt
+      .state('manageusers', {
+        url: '/manageusers',
+        parent: 'admin',
+        templateUrl: 'views/admin/manage-users.html'
+      })
+
       // Admin Profile
       .state('admin-profile', {
         url: '/profile',
