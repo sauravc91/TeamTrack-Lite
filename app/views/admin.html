@@ -1,0 +1,24 @@
+<div class="dashboard-page">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar" style="background-color: #e03c3c;">
+
+       <div class="text-center">
+        <h2 class="brand">TeamTrack</h2>
+        <img src="images/flat-avatar.png" class="user-avatar" /><br />
+        <a ui-sref="login" onclick="sessionStorage.removeItem('authToken');" class="btn btn-white btn-outline btn-rounded btn-sm">Logout</a>
+      </div>
+
+      <ul class="nav nav-sidebar">
+        <!--<li ng-class="{active: $state.includes('')}"><a ui-sref="">View Tasks <span class="sr-only">(current)</span></a></li>-->
+        <li ng-class="{active: $state.includes('overview')}"><a href="#">Manage Users <span class="sr-only">(current)</span></a></li>
+        <!--<li ng-class="{active: $state.includes('')}"><a ui-sref="">Update Task <span class="sr-only">(current)</span></a></li>-->
+        <li ng-class="{active: $state.includes('reports')}"><a ui-sref="admin-profile">Profile</a></li>
+      </ul>
+
+    </div>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ui-view>
+    </div>
+  </div>
+</div>
+</div>
