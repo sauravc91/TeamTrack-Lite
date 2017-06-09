@@ -73,6 +73,7 @@ angular.module('yapp', [
         url: '/admin',
         parent: 'base',
         templateUrl: 'views/admin.html',
+        authorize: true
       // controller: 'AdminCtrl'
       })
 
@@ -80,23 +81,58 @@ angular.module('yapp', [
       .state('admin-overview', {
         url: '/overview',
         parent: 'admin',
-        templateUrl: 'views/admin/overview.html'
+        templateUrl: 'views/admin/overview.html',
+        authorize: true
       })
 
       // Admin user mgmt
       .state('manageusers', {
         url: '/manageusers',
         parent: 'admin',
-        templateUrl: 'views/admin/manage-users.html'
+        templateUrl: 'views/admin/manage-users.html',
+        authorize: true
       })
 
       // Admin Profile
       .state('admin-profile', {
         url: '/profile',
         parent: 'admin',
-        templateUrl: 'views/admin/profile.html'
+        templateUrl: 'views/admin/profile.html',
+        authorize: true
       });
 
     // use the HTML5 History API
     $locationProvider.html5Mode(true);
-  });
+  })
+
+  .run(function($rootScope,$state,$location){
+    alertify.set('notifier', 'position', 'top-right');
+    $rootScope.$on('$stateChangeStart', 
+      function(event, toState, toParams, fromState, fromParams, options){ 
+        
+          if(toState.name!='login' && toState.name!='register'){
+            if(sessionStorage.getItem('authToken')==null || sessionStorage.getItem('authToken')=="undefined"){
+              
+              debugger
+              
+              event.preventDefault();
+              $state.go('login');
+              alertify.error('Please login first');
+            }
+            else{
+              var jwt =sessionStorage.getItem('authToken').split('.')
+              var flash= JSON.parse(atob(jwt[1])).Role;
+              if(toState.authorize==true && flash!=='TQ=='){
+                  event.preventDefault();
+                  sessionStorage.removeItem('authToken');
+                  $state.go('login');
+                  alertify.error('Access restricted ! You have been logged out');
+              }
+            }
+          }
+          
+          debugger 
+          // transitionTo() promise will be rejected with 
+          // a 'transition prevented' error
+      })
+  })
