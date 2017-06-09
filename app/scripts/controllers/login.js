@@ -10,7 +10,7 @@
 angular.module('yapp')
   .controller('LoginCtrl', function ($scope, $location, $http, $state) {
     alertify.set('notifier', 'position', 'top-right');
-    // $scope.test='Test'
+
     $scope.apiUrl = 'http://localhost:3000/api/';
 
     $scope.auth = function (obj) {
@@ -22,7 +22,12 @@ angular.module('yapp')
       }).then(function successCallback (response) {
         if (response.data.success == true) {
           sessionStorage.setItem('authToken', response.data.token);
-          $state.go('overview');
+          var jwt =sessionStorage.getItem('authToken').split('.')
+          var flash= JSON.parse(atob(jwt[1])).Role;
+          if(flash==='TQ==')
+            $state.go('admin-overview');
+          else
+            $state.go('overview');
         }else {
           alertify.error('Authentication failed for your credentials');
         }

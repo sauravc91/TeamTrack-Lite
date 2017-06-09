@@ -44,28 +44,32 @@ angular.module('yapp', [
         url: '/user',
         parent: 'base',
         templateUrl: 'views/dashboard.html',
-        controller: 'DashboardCtrl'
+        controller: 'DashboardCtrl',
+        authorize: false
       })
 
       // User OverView
       .state('overview', {
         url: '/overview',
         parent: 'user',
-        templateUrl: 'views/dashboard/overview.html'
+        templateUrl: 'views/dashboard/overview.html',
+        authorize: false
       })
 
       // User Task Add
       .state('logtask', {
         url: '/logtask',
         parent: 'user',
-        templateUrl: 'views/dashboard/task-logger.html'
+        templateUrl: 'views/dashboard/task-logger.html',
+        authorize: false
       })
 
       // User profile
       .state('profile', {
         url: '/profile',
         parent: 'user',
-        templateUrl: 'views/dashboard/profile.html'
+        templateUrl: 'views/dashboard/profile.html',
+        authorize: false
       })
 
       // Admin dashboard base
@@ -123,6 +127,12 @@ angular.module('yapp', [
               var jwt =sessionStorage.getItem('authToken').split('.')
               var flash= JSON.parse(atob(jwt[1])).Role;
               if(toState.authorize==true && flash!=='TQ=='){
+                  event.preventDefault();
+                  sessionStorage.removeItem('authToken');
+                  $state.go('login');
+                  alertify.error('Access restricted ! You have been logged out');
+              }
+              if(toState.authorize==false && flash!=='RQ=='){
                   event.preventDefault();
                   sessionStorage.removeItem('authToken');
                   $state.go('login');
