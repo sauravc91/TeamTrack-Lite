@@ -11,7 +11,7 @@ angular.module('yapp')
   .controller('SignUpCtrl', function ($scope, $location, $http, $state) {
     alertify.set('notifier', 'position', 'top-right');
     // $scope.test='Test'
-    $scope.apiUrl = 'http://localhost:3000/api/';
+    $scope.apiUrl = 'http://10.11.113.61:3000/api/';
 
     $scope.register = function (obj) {
       if (obj.password === obj.cpassword) {

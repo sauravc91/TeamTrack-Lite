@@ -61,7 +61,8 @@ angular.module('yapp', [
         url: '/logtask',
         parent: 'user',
         templateUrl: 'views/dashboard/task-logger.html',
-        authorize: false
+        authorize: false,
+        controller: 'taskCtrl'
       })
 
       // User profile

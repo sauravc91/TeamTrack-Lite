@@ -1,4 +1,4 @@
-<div>
+<div ng-controller="taskCtrl">
 	<a ui-sref="overview" class="pull-right btn btn-primary btn-outline btn-rounded">Back to Overview</a>
 	<h2>Task Logger</h2>
 	<!--<span class="glyphicon glyphicon-dashboard bg-fade"></span>-->
@@ -6,19 +6,19 @@
 		       
             <div class="container">
 			<div class="col-md-10 col-md-offset-1">
-				<form>
+				<form ng-submit="logTask(task)">
 				<div class="row">
 					<div class="col-md-6">
 					<div class="form-group">
 						<label>Task Title</label>
-						<textarea class="form-control" id="" placeholder="Title of the user story or service ticket"></textarea>
+						<textarea class="form-control" id="" ng-model="task.Title" placeholder="Title of the user story or service ticket"></textarea>
 					</div>
 					</div>
 
 					<div class="col-md-6">
 					<div class="form-group">
 						<label>Task Description</label>
-						<textarea class="form-control" id="" placeholder="Description of  the task"></textarea>
+						<textarea class="form-control" id="" ng-model="task.Description" placeholder="Description of  the task"></textarea>
 					</div>
 					</div>
 
@@ -28,7 +28,7 @@
 					<div class="col-md-6">
 					<div class="form-group">
 						<label>Task Type</label>
-						<select class="form-control">
+						<select class="form-control" ng-model="task.TaskType">
 							<option>Select type of task</option>
 							<option>User Story</option>
 							<option>Service Ticket</option>
@@ -39,7 +39,7 @@
 					<div class="col-md-6">
 					<div class="form-group">
 						<label>Task Reference ID</label>
-						<input type="password" class="form-control" id="" placeholder="Service Ticket or User Story Identifier">
+						<input type="text" class="form-control" id="" ng-model="task.TaskReferenceID" placeholder="Service Ticket or User Story Identifier">
 					</div>
 					</div>
 
@@ -49,35 +49,35 @@
 					<div class="col-md-6">
 					<div class="form-group">
 						<label>Estimated Start Date</label>
-						<input type="date" class="form-control" id="" placeholder="">
+						<input type="date" class="form-control" id="" ng-model="task.EstimatedStartDate" placeholder="">
 					</div>
 					</div>
 
 					<div class="col-md-6">
 					<div class="form-group">
 						<label>Estimated End Date</label>
-						<input type="date" class="form-control" id="" placeholder="">
+						<input type="date" class="form-control" id="" ng-model="task.EstimatedEndDate" placeholder="">
 					</div>
 					</div>
 
 				</div>
 
-				<div class="row">
+				<!--<div class="row">
 					<div class="col-md-6">
 					<div class="form-group">
 						<label>Actual Start Date</label>
-						<input type="date" class="form-control" id="" placeholder="">
+						<input type="date" class="form-control" id="" ng-model="task.ActualStartDate" placeholder="">
 					</div>
 					</div>
 
 					<div class="col-md-6">
 					<div class="form-group">
 						<label>Actual End Date</label>
-						<input type="date" class="form-control" id="" placeholder="">
+						<input type="date" class="form-control" id="" ng-model="task.ActualEndDate" placeholder="">
 					</div>
 					</div>
 
-				</div>
+				</div>-->
 				<br/>
 				<div class="row">
 					<div class="text-center">

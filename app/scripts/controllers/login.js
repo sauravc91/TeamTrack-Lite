@@ -11,7 +11,7 @@ angular.module('yapp')
   .controller('LoginCtrl', function ($scope, $location, $http, $state) {
     alertify.set('notifier', 'position', 'top-right');
 
-    $scope.apiUrl = 'http://localhost:3000/api/';
+    $scope.apiUrl = 'http://10.11.113.61:3000/api/';
 
     $scope.auth = function (obj) {
       var loginDTO = {'userName': obj.username,'password': obj.password};
@@ -22,8 +22,10 @@ angular.module('yapp')
       }).then(function successCallback (response) {
         if (response.data.success == true) {
           sessionStorage.setItem('authToken', response.data.token);
-          var jwt =sessionStorage.getItem('authToken').split('.')
+          var jwt =sessionStorage.getItem('authToken').split('.');
+          sessionStorage.setItem('userObj', JSON.stringify(atob(jwt[1])));
           var flash= JSON.parse(atob(jwt[1])).Role;
+
           if(flash==='TQ==')
             $state.go('admin-overview');
           else
